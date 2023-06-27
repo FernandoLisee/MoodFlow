@@ -1,0 +1,4 @@
+boto3==1.9.216
+ask-sdk-core==1.11.0
+textblob==0.17.1
+translate==3.6.1
