@@ -77,10 +77,10 @@ class MeuDiaIntentHandler(AbstractRequestHandler):
         # Mapeamento dos estados de espírito para os gêneros correspondentes
         generos = {
             'feliz': ['rock', 'pop', 'reggae'],
-            'triste': ['baladas', 'rock alternativo'],
-            'calmo': ['musica classica', 'jazz'],
-            'animado': ['eletronica', 'hip hop'],
-            'motivado': ['metal', 'rap']
+            'triste': ['indie', 'rock alternativo'],
+            'calmo': ['musica classica', 'jazz', 'lofi'],
+            'animado': ['funk', 'hip hop'],
+            'motivado': ['metal', 'rap', 'eletronica']
         }
         
         # Verifica se o estado de espírito é válido
@@ -116,7 +116,7 @@ class MeuDiaIntentHandler(AbstractRequestHandler):
         else:
             return 'Ocorreu um erro ao criar a playlist.'
 
-        
+    # Mapeia a polaridade para um estado de espírito correspondente   
     def analyseText(self, textResponse):
         polaridade = 0
         
@@ -145,6 +145,7 @@ class MeuDiaIntentHandler(AbstractRequestHandler):
         
         return traducao
 
+# Código extraido do developer console da Alexa
 
 class HelpIntentHandler(AbstractRequestHandler):
     """Handler for Help Intent."""
