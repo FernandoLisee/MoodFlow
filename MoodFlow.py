@@ -5,10 +5,10 @@ from textblob.sentiments import NaiveBayesAnalyzer
 
 # Configurações da API do Spotify
 SCOPE = "playlist-modify-public"
-USERNAME = "2232xa42crdx3lqbjb5rsefqq"  # Substitua pelo seu nome de usuário do Spotify
-CLIENT_ID = "69676a7e57da46c7a2dfc61c60e8b48f"  # Substitua pelo seu client ID do Spotify
-CLIENT_SECRET = "s22ce0186bbf746bab7bb9c7127e2d761"  # Substitua pelo seu client secret do Spotify
-REDIRECT_URI = "http://localhost:8888/callback"  # URL de redirecionamento
+USERNAME = "2232xa42crdx3lqbjb5rsefqq"  
+CLIENT_ID = "69676a7e57da46c7a2dfc61c60e8b48f"  
+CLIENT_SECRET = "s22ce0186bbf746bab7bb9c7127e2d761"
+REDIRECT_URI = "http://localhost:8000/index.html"  
 
 ## Autenticar na API do Spotify
 auth_manager = SpotifyClientCredentials(client_id=CLIENT_ID, client_secret=CLIENT_SECRET)
@@ -49,19 +49,16 @@ def criar_playlist_personalizada(sentimento):
 
     if playlist_id:
         playlist_nome = f"Playlist {sentimento.capitalize()}"
-        sp.user_playlist_create(user='seu_username', name=playlist_nome, public=True)
-        sp.user_playlist_add_tracks(user='seu_username', playlist_id=playlist_id, tracks=['spotify:track:track_id'])
+        sp.user_playlist_create(user=USERNAME, name=playlist_nome, public=True)
+        sp.user_playlist_add_tracks(user=USERNAME, playlist_id=playlist_id, tracks=['spotify:track:track_id'])
         print(f"A playlist '{playlist_nome}' foi criada com sucesso!")
     else:
         print("Não foi possível encontrar uma playlist correspondente ao gênero desejado.")
 
 # Função principal
-def main():
-    # Entrada do usuário
-    frase = input("Digite a frase para analisar o sentimento: ")
-
+def main(frase_chave):
     # Analisar o sentimento
-    sentimento = analisar_sentimento(frase)
+    sentimento = analisar_sentimento(frase_chave)
 
     # Resposta baseada no sentimento
     if sentimento == 'positivo':
@@ -71,11 +68,11 @@ def main():
     else:
         resposta = "Fico feliz em saber que você está se sentindo neutro hoje."
 
-    # Exibir a resposta
     print(resposta)
 
     # Criar playlist personalizada com base no sentimento
     criar_playlist_personalizada(sentimento)
 
 if __name__ == '__main__':
+    
     main()
